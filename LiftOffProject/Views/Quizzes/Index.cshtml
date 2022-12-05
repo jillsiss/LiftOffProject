@@ -2,7 +2,39 @@
 
 <h1>Quizzes</h1>
 
+<p>
+    <a asp-controller="Quizzes" asp-action="Add">Add Quiz</a>
+</p>
+
 @if (Model.Count == 0)
 {
     <p>No quizzes available</p>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Published
+            </th>
+        </tr>
+        @foreach (var qz in Model)
+        {
+            <tr>
+                <td>@qz.Id</td>
+                <td>@qz.Title</td>
+                <td>@qz.Author</td>
+                <td>@qz.Published</td>
+            </tr>
+        }
+    </table>
 }
