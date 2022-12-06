@@ -10,8 +10,18 @@ namespace LiftOffProject.Models
         public Question Question { get; set; }
         public string Choice { get; set; }
 
+        public Answers(bool isAnswer, bool isSelected, Question question, string choice)
+        {
+            Question = question;
+            IsAnswer = isAnswer;
+            IsSelected = isSelected;
+            Choice = choice;
+
+        }
+
         public Answers()
         {
+             
         }
     }
 }

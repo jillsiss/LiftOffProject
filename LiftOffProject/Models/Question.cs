@@ -10,9 +10,12 @@ namespace LiftOffProject.Models
         public int Point { get; set; }
 
 
-        public Question()
+        public Question(string query, List<Answers> answers, int point)
         {
-
+            Query = query;
+            Answers = answers;
+            Point = point;
         }
+        
     }
 }
