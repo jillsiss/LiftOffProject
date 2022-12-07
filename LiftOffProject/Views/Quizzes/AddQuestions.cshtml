@@ -1,28 +1,31 @@
 ﻿@model LiftOffProject.ViewModels.AddQuestionViewModel
 
-<h1>Add Questions, Homie</h1>
+<h1>Add Questions</h1>
 
 
 
-<form asp-controller="Questions" asp-action="Add" method="post" id="questionform" />
+<form asp-controller="Quizzes" asp-action="AddQuestions" method="post" id="questionform" />
     <div class="form-group">
         <label asp-for="Query"></label>
         <input asp-for="Query" />
         <span asp-validation-for="Query"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Answers"></label>
-        <input asp-for="Answers" />
+        <label asp-for="Answers">
+        <input type="text" value="choice1" placeholder="First Choice"/><input asp-for="Answers" type="radio" name="question1" value="choice1" />
+        <input type="text" value="choice2" placeholder="Second Choice" /><input asp-for="Answers" type="radio" name="question1" value="choice2" />
+        <input type="text" value="choice3" placeholder="Third Choice" /><input asp-for="Answers" type="radio" name="question1" value="choice3" />
+        </label>
         <span asp-validation-for="Answers"></span>
     </div>
 
-    <button id="addQuestion">Add Question</button>  
+    <button onclick={AddQuestions} id="addQuestion">Add Question</button>  
 
-<script>
+@*<script>
     document.addEventListener("click", function(){
     document.getElementById("addQuestion").innerHTML(getElementById("questionform"))
     })
-</script>
+</script>*@
 
 
     <input type="submit" value="Finish" />

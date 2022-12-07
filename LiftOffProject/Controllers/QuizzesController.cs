@@ -51,10 +51,34 @@ namespace LiftOffProject.Controllers
                 context.Quizzes.Add(newQuiz);
                 context.SaveChanges();
 
-                return Redirect("Index");
+                return Redirect("AddQuestions/" + newQuiz.Id);
             }
 
             return View(addQuizViewModel);
+        }
+
+        public IActionResult AddQuestions(int quizId)
+        {
+            Quiz quiz = context.Quizzes.Find(quizId);
+            AddQuestionViewModel addQuestionViewModel = new AddQuestionViewModel();
+            return View(quiz);
+        }
+
+        [HttpPost]
+        public IActionResult AddQuestions(AddQuestionViewModel addQuestionViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Question newQuestion = new Question
+                {
+                    Query = addQuestionViewModel.Query,
+
+                };
+
+                return View(newQuestion);
+            }
+
+            return Redirect("Index");
         }
     }
 }
