@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LiftOffProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221207210401_AddedAnswerClass")]
-    partial class AddedAnswerClass
+    [Migration("20221208210323_2ndMig")]
+    partial class _2ndMig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,7 +63,7 @@ namespace LiftOffProject.Migrations
 
                     b.HasIndex("QuizId");
 
-                    b.ToTable("Question");
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("LiftOffProject.Models.Quiz", b =>

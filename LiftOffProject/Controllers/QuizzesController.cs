@@ -72,11 +72,24 @@ namespace LiftOffProject.Controllers
                 Question newQuestion = new Question
                 {
                     Query = addQuestionViewModel.Query,
+                    Id = addQuestionViewModel.QuestionId,
 
+                    
                 };
+                
+                //foreach (var Question in AddQuestions)
+                //{
+                //    context.Questions.Add(newQuestion);
 
-                return View(newQuestion);
+                //}
+                
+                
+                context.Questions.Add(newQuestion);
+                context.SaveChanges();
+                return View(addQuestionViewModel);
+                
             }
+
 
             return Redirect("Index");
         }

@@ -61,7 +61,7 @@ namespace LiftOffProject.Migrations
 
                     b.HasIndex("QuizId");
 
-                    b.ToTable("Question");
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("LiftOffProject.Models.Quiz", b =>
