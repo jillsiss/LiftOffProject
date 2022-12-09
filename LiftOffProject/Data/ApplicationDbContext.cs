@@ -10,7 +10,7 @@ namespace LiftOffProject.Data
     public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<Quiz> Quizzes { get; set; }
-        public DbSet<Question> Question { get; set; }
+        public DbSet<Question> Questions { get; set; }
         public DbSet<Answers> Answers { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
