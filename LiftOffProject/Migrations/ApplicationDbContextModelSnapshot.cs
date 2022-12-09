@@ -79,6 +79,9 @@ namespace LiftOffProject.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("TotalPoints")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Quizzes");

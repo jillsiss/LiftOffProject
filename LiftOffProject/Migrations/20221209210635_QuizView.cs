@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LiftOffProject.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class QuizView : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,7 +55,8 @@ namespace LiftOffProject.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(nullable: true),
                     Author = table.Column<string>(nullable: true),
-                    Published = table.Column<DateTime>(nullable: false)
+                    Published = table.Column<DateTime>(nullable: false),
+                    TotalPoints = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -169,7 +170,7 @@ namespace LiftOffProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Question",
+                name: "Questions",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -180,9 +181,9 @@ namespace LiftOffProject.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Question", x => x.Id);
+                    table.PrimaryKey("PK_Questions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Question_Quizzes_QuizId",
+                        name: "FK_Questions_Quizzes_QuizId",
                         column: x => x.QuizId,
                         principalTable: "Quizzes",
                         principalColumn: "Id",
@@ -204,9 +205,9 @@ namespace LiftOffProject.Migrations
                 {
                     table.PrimaryKey("PK_Answers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Answers_Question_QuestionId",
+                        name: "FK_Answers_Questions_QuestionId",
                         column: x => x.QuestionId,
-                        principalTable: "Question",
+                        principalTable: "Questions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -254,8 +255,8 @@ namespace LiftOffProject.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Question_QuizId",
-                table: "Question",
+                name: "IX_Questions_QuizId",
+                table: "Questions",
                 column: "QuizId");
         }
 
@@ -280,7 +281,7 @@ namespace LiftOffProject.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Question");
+                name: "Questions");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -93,5 +93,15 @@ namespace LiftOffProject.Controllers
 
             return Redirect("Index");
         }
+
+        public IActionResult Quiz(int id)
+        {
+            Quiz theQuiz = context.Quizzes
+                .Find(id);
+
+            QuizViewModel quizViewModel = new QuizViewModel(theQuiz);
+            return View(quizViewModel);
+
+        }
     }
 }

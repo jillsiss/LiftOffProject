@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LiftOffProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221208203908_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20221209210635_QuizView")]
+    partial class QuizView
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,7 +63,7 @@ namespace LiftOffProject.Migrations
 
                     b.HasIndex("QuizId");
 
-                    b.ToTable("Question");
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("LiftOffProject.Models.Quiz", b =>
@@ -80,6 +80,9 @@ namespace LiftOffProject.Migrations
 
                     b.Property<string>("Title")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("TotalPoints")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

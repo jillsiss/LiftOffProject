@@ -1,0 +1,26 @@
+﻿@model LiftOffProject.ViewModels.QuizViewModel
+
+<h1>@Model.Title by @Model.Author<h1>
+
+<table class="table">
+
+    <tr>
+        <th>ID</th>
+        <th>Quiz Name</th>
+        <th>Author</th>
+        <th>Published On</th>
+        <th># Questions</th>
+    </tr>
+@*    @foreach (var qz in Model)
+    {*@
+        <tr>
+            <td>@Model.QuizId</td>
+            <td>@Model.Title</td>
+            <td>@Model.Author</td>
+            <td>@Model.Published</td>
+@*            <td>@Model.Questions.Count</td>
+            <td>@Model.TotalPoints</td>*@
+        </tr>
+@*    }*@
+
+</table>
