@@ -94,14 +94,37 @@ namespace LiftOffProject.Controllers
             return Redirect("Index");
         }
 
-        public IActionResult Quiz(int id)
+        [HttpGet]
+        [Route("/quizzes/quiz/{quizId}")]
+        public IActionResult Quiz(int quizId)
         {
             Quiz theQuiz = context.Quizzes
-                .Find(id);
+                .Find(quizId);
 
             QuizViewModel quizViewModel = new QuizViewModel(theQuiz);
             return View(quizViewModel);
 
+        }
+
+        [HttpPost]
+        [Route("/quizzes/quiz/")]
+        public IActionResult Edit(int quizId, string title, string author)
+        {
+            
+            Quiz theQuiz = context.Quizzes
+                .Find(quizId);
+
+            QuizViewModel quizViewModel = new QuizViewModel(theQuiz)
+            {
+                Title = title,
+                Author = author
+            };
+
+            quizViewModel.Title = title;
+            quizViewModel.Author = author;
+
+            context.SaveChanges();
+            return Redirect("/quizzes");
         }
     }
 }
