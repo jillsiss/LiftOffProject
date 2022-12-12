@@ -122,5 +122,28 @@ namespace LiftOffProject.Controllers
 
             return Redirect("/Quizzes");
         }
+
+        [HttpGet]
+        [Route("/quizzes/delete/{quizId}")]
+        public IActionResult Delete(int quizId)
+        {
+            Quiz theQuiz = context.Quizzes
+                .Find(quizId);
+
+            QuizViewModel quizViewModel = new QuizViewModel(theQuiz);
+            return View(quizViewModel);
+        }
+
+
+        [HttpPost]
+        [Route("/quizzes/delete/{quizId}")]
+        public IActionResult Confirm(int quizId)
+        {
+            Quiz theQuiz = context.Quizzes.Find(quizId);
+            context.Quizzes.Remove(theQuiz);
+
+            context.SaveChanges();
+            return Redirect("/Quizzes");
+        }
     }
 }
