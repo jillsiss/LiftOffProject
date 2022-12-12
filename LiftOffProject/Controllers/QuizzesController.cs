@@ -107,24 +107,20 @@ namespace LiftOffProject.Controllers
         }
 
         [HttpPost]
-        [Route("/quizzes/quiz/")]
-        public IActionResult Edit(int quizId, string title, string author)
+        [Route("/quizzes/quiz/{quizId}")]
+        public IActionResult Quiz(int quizId, string title, string author)
         {
             
             Quiz theQuiz = context.Quizzes
                 .Find(quizId);
 
-            QuizViewModel quizViewModel = new QuizViewModel(theQuiz)
-            {
-                Title = title,
-                Author = author
-            };
 
-            quizViewModel.Title = title;
-            quizViewModel.Author = author;
+            theQuiz.Title = title;
+            theQuiz.Author = author;
 
             context.SaveChanges();
-            return Redirect("/quizzes");
+
+            return Redirect("/Quizzes");
         }
     }
 }
