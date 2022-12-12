@@ -2,7 +2,7 @@
 
 <h1>@Model.Title by @Model.Author</h1>
 
-<form method="post" asp-controller="Quizzes" asp-action="Edit">
+<form method="post" asp-controller="Quizzes" asp-action="Quiz">
     <table class="table">
 
         <tr>
@@ -17,14 +17,14 @@
             <td name="quizId" value="@Model.QuizId">@Model.QuizId</td>
                 <td>
                     <div class="form-group">
-                        <label asp-for="Title"></label>
-                        <input asp-for="@Model.Title" type="text" value="@Model.Title" />
+                        <label asp-for="@Model.Title"></label>
+                        <input asp-for="@Model.Title" type="text" />
                     </div>
                 </td>
                 <td>
                     <div class="form-group">   
-                        <label asp-for="Author"></label>
-                        <input asp-for="@Model.Author" type="text" value="@Model.Author" />
+                        <label asp-for="@Model.Author"></label>
+                        <input asp-for="@Model.Author" type="text" />
                     </div>
                 </td>
                 <td>@Model.Published"</td>
