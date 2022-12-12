@@ -17,20 +17,51 @@ namespace LiftOffProject.Migrations
                 .HasAnnotation("ProductVersion", "3.1.28")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("LiftOffProject.Models.Answers", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Choice")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("IsAnswer")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsSelected")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int?>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Answers");
+                });
+
             modelBuilder.Entity("LiftOffProject.Models.Question", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("QuizId")
+                    b.Property<int>("Point")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Query")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("QuizId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("QuizId");
 
-                    b.ToTable("Question");
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("LiftOffProject.Models.Quiz", b =>
@@ -47,6 +78,9 @@ namespace LiftOffProject.Migrations
 
                     b.Property<string>("Title")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("TotalPoints")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -249,11 +283,20 @@ namespace LiftOffProject.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("LiftOffProject.Models.Answers", b =>
+                {
+                    b.HasOne("LiftOffProject.Models.Question", "Question")
+                        .WithMany("Answers")
+                        .HasForeignKey("QuestionId");
+                });
+
             modelBuilder.Entity("LiftOffProject.Models.Question", b =>
                 {
                     b.HasOne("LiftOffProject.Models.Quiz", null)
                         .WithMany("Questions")
-                        .HasForeignKey("QuizId");
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

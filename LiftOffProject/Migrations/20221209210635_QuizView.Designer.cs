@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LiftOffProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221202214919_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20221209210635_QuizView")]
+    partial class QuizView
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,76 @@ namespace LiftOffProject.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.28")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("LiftOffProject.Models.Answers", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Choice")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("IsAnswer")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsSelected")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int?>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Answers");
+                });
+
+            modelBuilder.Entity("LiftOffProject.Models.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Point")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Query")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("QuizId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuizId");
+
+                    b.ToTable("Questions");
+                });
+
+            modelBuilder.Entity("LiftOffProject.Models.Quiz", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Author")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("Published")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("TotalPoints")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Quizzes");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -213,6 +283,22 @@ namespace LiftOffProject.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("LiftOffProject.Models.Answers", b =>
+                {
+                    b.HasOne("LiftOffProject.Models.Question", "Question")
+                        .WithMany("Answers")
+                        .HasForeignKey("QuestionId");
+                });
+
+            modelBuilder.Entity("LiftOffProject.Models.Question", b =>
+                {
+                    b.HasOne("LiftOffProject.Models.Quiz", null)
+                        .WithMany("Questions")
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

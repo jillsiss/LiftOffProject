@@ -26,6 +26,9 @@ else
             <th>
                 Published
             </th>
+            <th>
+                Edit Quiz
+            </th>
         </tr>
         @foreach (var qz in Model)
         {
@@ -34,6 +37,7 @@ else
                 <td>@qz.Title</td>
                 <td>@qz.Author</td>
                 <td>@qz.Published</td>
+                <td><a asp-controller="Quizzes" asp-action="Quiz" asp-route-id="@qz.Id">Edit</a></td>
             </tr>
         }
     </table>

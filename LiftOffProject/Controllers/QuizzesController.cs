@@ -51,10 +51,80 @@ namespace LiftOffProject.Controllers
                 context.Quizzes.Add(newQuiz);
                 context.SaveChanges();
 
-                return Redirect("Index");
+                return Redirect("AddQuestions/" + newQuiz.Id);
             }
 
             return View(addQuizViewModel);
+        }
+
+        public IActionResult AddQuestions(int quizId)
+        {
+            Quiz quiz = context.Quizzes.Find(quizId);
+            AddQuestionViewModel addQuestionViewModel = new AddQuestionViewModel();
+            return View(quiz);
+        }
+
+        [HttpPost]
+        public IActionResult AddQuestions(AddQuestionViewModel addQuestionViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Question newQuestion = new Question
+                {
+                    Query = addQuestionViewModel.Query,
+                    Id = addQuestionViewModel.QuestionId,
+
+                    
+                };
+                
+                //foreach (var Question in AddQuestions)
+                //{
+                //    context.Questions.Add(newQuestion);
+
+                //}
+                
+                
+                context.Questions.Add(newQuestion);
+                context.SaveChanges();
+                return View(addQuestionViewModel);
+                
+            }
+
+
+            return Redirect("Index");
+        }
+
+        [HttpGet]
+        [Route("/quizzes/quiz/{quizId}")]
+        public IActionResult Quiz(int quizId)
+        {
+            Quiz theQuiz = context.Quizzes
+                .Find(quizId);
+
+            QuizViewModel quizViewModel = new QuizViewModel(theQuiz);
+            return View(quizViewModel);
+
+        }
+
+        [HttpPost]
+        [Route("/quizzes/quiz/")]
+        public IActionResult Edit(int quizId, string title, string author)
+        {
+            
+            Quiz theQuiz = context.Quizzes
+                .Find(quizId);
+
+            QuizViewModel quizViewModel = new QuizViewModel(theQuiz)
+            {
+                Title = title,
+                Author = author
+            };
+
+            quizViewModel.Title = title;
+            quizViewModel.Author = author;
+
+            context.SaveChanges();
+            return Redirect("/quizzes");
         }
     }
 }
