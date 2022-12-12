@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using LiftOffProject.Data;
@@ -65,23 +66,35 @@ namespace LiftOffProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddQuestions(AddQuestionViewModel addQuestionViewModel)
+        public IActionResult AddQuestions(AddQuestionViewModel addQuestionViewModel, AddAnswerViewModel addAnswerViewModel)
         {
             if (ModelState.IsValid)
             {
+                List<Answers> theAnswers = new List<Answers>();
+                foreach (var answer in addQuestionViewModel.Answers)
+                    {
+
+
+                    Answers newAnswers = new Answers
+                    {
+                        IsAnswer = addQuestionViewModel.Answers.Contains(answer),
+                        IsSelected = addQuestionViewModel.Answers.Contains(answer),
+                       
+                    };
+                    }
+                
                 Question newQuestion = new Question
                 {
                     Query = addQuestionViewModel.Query,
-                    Id = addQuestionViewModel.QuestionId,
+                    Answers = theAnswers,
+                    
+                    
+
+                    //Answers = new List<Answers>
+                    
 
                     
                 };
-                
-                //foreach (var Question in AddQuestions)
-                //{
-                //    context.Questions.Add(newQuestion);
-
-                //}
                 
                 
                 context.Questions.Add(newQuestion);

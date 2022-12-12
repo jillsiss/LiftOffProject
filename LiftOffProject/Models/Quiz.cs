@@ -11,15 +11,13 @@ namespace LiftOffProject.Models
         public string Author { get; set; }
         public DateTime Published { get; set; }
         public List<Question> Questions { get; set; }
-        public int TotalPoints { get; set; }
 
-        public Quiz(string title, string author, DateTime published, List<Question> questions, int totalPoints)
+        public Quiz(string title, string author, DateTime published, List<Question> questions)
         {
             Title = title; 
             Author = author;
             Published = published;
             Questions = questions;
-            TotalPoints = totalPoints;
 
         }
 
