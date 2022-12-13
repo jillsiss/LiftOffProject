@@ -67,26 +67,24 @@ namespace LiftOffProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddQuestions(AddQuestionViewModel addQuestionViewModel, AddAnswerViewModel addAnswerViewModel)
+        public IActionResult AddQuestions(AddQuestionViewModel addQuestionViewModel)
         {
             if (ModelState.IsValid)
             {
                 List<Answers> theAnswers = new List<Answers>();
+
                 foreach (var answer in addQuestionViewModel.Answers)
                 {
-                    Answers newAnswers = new Answers
-                    { };
-                    if (newAnswers.IsAnswer == true)
+                    // this foreach loop iterates over the SelectListItem objects and converts them into Answer objects
+                    Answers newAnswer = new Answers();
+                    if (answer.Selected)
                     {
-                        addQuestionViewModel.CorrectAnswers.Add(newAnswers);
-                    }
-                    if (newAnswers.IsChosen == true)
-                    {
-                        addQuestionViewModel.ChosenAnswers.Add(newAnswers);
+                        newAnswer.IsAnswer = true;
                     }
 
-                    addAnswerViewModel.IsAnswer = addQuestionViewModel.CorrectAnswers.Contains(newAnswers);
-                    addAnswerViewModel.IsChosen = addQuestionViewModel.ChosenAnswers.Contains(newAnswers);
+                    newAnswer.Text = answer.Value;
+
+                    theAnswers.Add(newAnswer);
                 };
 
                 Question newQuestion = new Question
