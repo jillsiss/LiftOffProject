@@ -2,25 +2,38 @@
 
 <h1>@Model.Title by @Model.Author</h1>
 
-<table class="table">
+<form method="post" asp-controller="Quizzes" asp-action="Quiz">
+    <table class="table">
 
-    <tr>
-        <th>ID</th>
-        <th>Quiz Name</th>
-        <th>Author</th>
-        <th>Published On</th>
-        <th># Questions</th>
-    </tr>
-@*    @foreach (var qz in Model)
-    {*@
         <tr>
-            <td>@Model.QuizId</td>
-            <td>@Model.Title</td>
-            <td>@Model.Author</td>
-            <td>@Model.Published</td>
-@*            <td>@Model.Questions.Count</td>
-            <td>@Model.TotalPoints</td>*@
+            <th>ID</th>
+            <th>Quiz Name</th>
+            <th>Author</th>
+            <th>Published On</th>
+            <th># Questions</th>
         </tr>
-@*    }*@
 
-</table>
+            <tr>
+            <td name="quizId" value="@Model.QuizId">@Model.QuizId</td>
+                <td>
+                    <div class="form-group">
+                        <label asp-for="@Model.Title"></label>
+                        <input asp-for="@Model.Title" type="text" />
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">   
+                        <label asp-for="@Model.Author"></label>
+                        <input asp-for="@Model.Author" type="text" />
+                    </div>
+                </td>
+                <td>@Model.Published"</td>
+    @*            <td>@Model.Questions.Count</td>
+                <td>@Model.TotalPoints</td>*@
+            </tr>
+
+
+    </table>
+    <input type="hidden" value="@Model.QuizId" name="QuizId" />
+    <input type="submit" value="Update" />
+</form>

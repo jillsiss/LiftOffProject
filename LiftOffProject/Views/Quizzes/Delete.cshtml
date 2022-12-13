@@ -1,0 +1,8 @@
+﻿@model LiftOffProject.ViewModels.QuizViewModel
+
+<h1>Confirm Delete?</h1>
+
+<form asp-controller="Quizzes" asp-action="Delete" asp-route-id="@Model.QuizId">
+    <p>@Model.Title by @Model.Author</p>
+    <input type="submit" value="Delete Quiz" />
+</form>
