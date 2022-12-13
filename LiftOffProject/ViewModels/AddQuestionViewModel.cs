@@ -15,12 +15,15 @@ namespace LiftOffProject.ViewModels
         [Required(ErrorMessage = "Question is required.")]
         public string Query { get; set; }
         public List<SelectListItem> Answers { get; set; }
+
+        public List<Answers> CorrectAnswers { get; set; }
+        public List<Answers> ChosenAnswers { get; set; }
         
 
-        public AddQuestionViewModel(Quiz quiz)
-        {
-            QuizId = quiz.Id;
-        }
+        //public AddQuestionViewModel(Quiz quiz)
+        //{
+        //    QuizId = quiz.Id;
+        //}
         public AddQuestionViewModel(Quiz quiz, List<Answers> answers)
         {
             QuizId = quiz.Id;

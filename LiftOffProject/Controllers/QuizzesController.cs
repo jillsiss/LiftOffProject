@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using LiftOffProject.Data;
@@ -7,6 +8,7 @@ using LiftOffProject.Models;
 using LiftOffProject.ViewModels;
 //using LiftOffProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -65,34 +67,46 @@ namespace LiftOffProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddQuestions(AddQuestionViewModel addQuestionViewModel)
+        public IActionResult AddQuestions(AddQuestionViewModel addQuestionViewModel, AddAnswerViewModel addAnswerViewModel)
         {
             if (ModelState.IsValid)
             {
+                List<Answers> theAnswers = new List<Answers>();
+                foreach (var answer in addQuestionViewModel.Answers)
+                {
+                    Answers newAnswers = new Answers
+                    { };
+                    if (newAnswers.IsAnswer == true)
+                    {
+                        addQuestionViewModel.CorrectAnswers.Add(newAnswers);
+                    }
+                    if (newAnswers.IsChosen == true)
+                    {
+                        addQuestionViewModel.ChosenAnswers.Add(newAnswers);
+                    }
+
+                    addAnswerViewModel.IsAnswer = addQuestionViewModel.CorrectAnswers.Contains(newAnswers);
+                    addAnswerViewModel.IsChosen = addQuestionViewModel.ChosenAnswers.Contains(newAnswers);
+                };
+
                 Question newQuestion = new Question
                 {
                     Query = addQuestionViewModel.Query,
-                    Id = addQuestionViewModel.QuestionId,
+                    Answers = theAnswers,
 
-                    
                 };
-                
-                //foreach (var Question in AddQuestions)
-                //{
-                //    context.Questions.Add(newQuestion);
+            
 
-                //}
-                
-                
-                context.Questions.Add(newQuestion);
-                context.SaveChanges();
-                return View(addQuestionViewModel);
-                
+            context.Questions.Add(newQuestion);
+
+            context.SaveChanges();
             }
-
-
-            return Redirect("Index");
+            return View(addQuestionViewModel);
         }
+   
+
+        //    return Redirect("Index");
+        //}
 
         [HttpGet]
         [Route("/quizzes/quiz/{quizId}")]
@@ -146,4 +160,5 @@ namespace LiftOffProject.Controllers
             return Redirect("/Quizzes");
         }
     }
-}
+};
+

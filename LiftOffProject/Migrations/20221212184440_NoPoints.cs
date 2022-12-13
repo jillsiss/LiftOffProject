@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LiftOffProject.Migrations
 {
-    public partial class QuizView : Migration
+    public partial class NoPoints : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,8 +55,7 @@ namespace LiftOffProject.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(nullable: true),
                     Author = table.Column<string>(nullable: true),
-                    Published = table.Column<DateTime>(nullable: false),
-                    TotalPoints = table.Column<int>(nullable: false)
+                    Published = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -176,8 +175,7 @@ namespace LiftOffProject.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     QuizId = table.Column<int>(nullable: false),
-                    Query = table.Column<string>(nullable: true),
-                    Point = table.Column<int>(nullable: false)
+                    Query = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

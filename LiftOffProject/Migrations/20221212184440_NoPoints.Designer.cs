@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LiftOffProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221209210635_QuizView")]
-    partial class QuizView
+    [Migration("20221212184440_NoPoints")]
+    partial class NoPoints
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,9 +50,6 @@ namespace LiftOffProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("Point")
-                        .HasColumnType("int");
-
                     b.Property<string>("Query")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -80,9 +77,6 @@ namespace LiftOffProject.Migrations
 
                     b.Property<string>("Title")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("TotalPoints")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
