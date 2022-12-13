@@ -7,17 +7,17 @@ namespace LiftOffProject.Models
     {
         public int Id { get; set; }
         public bool IsAnswer { get; set; }
-        public bool IsSelected { get; set; }
+        public bool IsChosen { get; set; }
         public Question Question { get; set; }
         public string Choice { get; set; }   //Do we need this?//
-        public bool CorrectAnswers { get; set; }
+        public List<Answers> CorrectAnswers { get; set; }
         public List<Answers> ChosenAnswers { get; set; }
 
-        public Answers(bool isAnswer, bool isSelected, Question question, string choice, List<Answers> correctAnswers, List<Answers> chosenAnswers)
+        public Answers(bool isAnswer, bool isChosen, Question question, string choice, List<Answers> correctAnswers, List<Answers> chosenAnswers)
         {
             Question = question;
             IsAnswer = isAnswer;
-            IsSelected = isSelected;
+            IsChosen = isChosen;
             Choice = choice;//Do we need this?//
             CorrectAnswers = correctAnswers;
             ChosenAnswers = chosenAnswers;
@@ -32,7 +32,7 @@ namespace LiftOffProject.Models
             }
             
 
-            if (answer.IsSelected == true)
+            if (answer.IsChosen == true)
             {
                 ChosenAnswers.Add(answer);
             }

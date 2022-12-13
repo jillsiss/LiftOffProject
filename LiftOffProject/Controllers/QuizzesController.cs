@@ -8,6 +8,7 @@ using LiftOffProject.Models;
 using LiftOffProject.ViewModels;
 //using LiftOffProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -72,40 +73,40 @@ namespace LiftOffProject.Controllers
             {
                 List<Answers> theAnswers = new List<Answers>();
                 foreach (var answer in addQuestionViewModel.Answers)
-                    {
-
-
+                {
                     Answers newAnswers = new Answers
+                    { };
+                    if (newAnswers.IsAnswer == true)
                     {
-                        IsAnswer = addQuestionViewModel.Answers.Contains(answer),
-                        IsSelected = addQuestionViewModel.Answers.Contains(answer),
-                       
-                    };
+                        addQuestionViewModel.CorrectAnswers.Add(newAnswers);
                     }
-                
+                    if (newAnswers.IsChosen == true)
+                    {
+                        addQuestionViewModel.ChosenAnswers.Add(newAnswers);
+                    }
+
+                    addAnswerViewModel.IsAnswer = addQuestionViewModel.CorrectAnswers.Contains(newAnswers);
+                    addAnswerViewModel.IsChosen = addQuestionViewModel.ChosenAnswers.Contains(newAnswers);
+                };
+
                 Question newQuestion = new Question
                 {
                     Query = addQuestionViewModel.Query,
                     Answers = theAnswers,
-                    
-                    
 
-                    //Answers = new List<Answers>
-                    
-
-                    
                 };
-                
-                
-                context.Questions.Add(newQuestion);
-                context.SaveChanges();
-                return View(addQuestionViewModel);
-                
+            
+
+            context.Questions.Add(newQuestion);
+
+            context.SaveChanges();
             }
-
-
-            return Redirect("Index");
+            return View(addQuestionViewModel);
         }
+   
+
+        //    return Redirect("Index");
+        //}
 
         public IActionResult Quiz(int id)
         {
@@ -117,4 +118,5 @@ namespace LiftOffProject.Controllers
 
         }
     }
-}
+};
+

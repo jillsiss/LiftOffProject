@@ -20,10 +20,10 @@ namespace LiftOffProject.ViewModels
         public List<Answers> ChosenAnswers { get; set; }
         
 
-        public AddQuestionViewModel(Quiz quiz)
-        {
-            QuizId = quiz.Id;
-        }
+        //public AddQuestionViewModel(Quiz quiz)
+        //{
+        //    QuizId = quiz.Id;
+        //}
         public AddQuestionViewModel(Quiz quiz, List<Answers> answers)
         {
             QuizId = quiz.Id;
