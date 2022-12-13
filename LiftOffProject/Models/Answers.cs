@@ -8,35 +8,22 @@ namespace LiftOffProject.Models
         public int Id { get; set; }
         public bool IsAnswer { get; set; }
         public bool IsChosen { get; set; }
-        public Question Question { get; set; }
+        //public Question Question { get; set; }
         public string Choice { get; set; }   //Do we need this?//
-        public List<Answers> CorrectAnswers { get; set; }
-        public List<Answers> ChosenAnswers { get; set; }
+        public string Text { get; set; }
 
-        public Answers(bool isAnswer, bool isChosen, Question question, string choice, List<Answers> correctAnswers, List<Answers> chosenAnswers)
+
+        public Answers(bool isAnswer, bool isChosen, /*Question question, */string choice, string text)
         {
-            Question = question;
+            //Question = question;
             IsAnswer = isAnswer;
             IsChosen = isChosen;
             Choice = choice;//Do we need this?//
-            CorrectAnswers = correctAnswers;
-            ChosenAnswers = chosenAnswers;
+            Text = text;
         }
         
         public Answers()
         {
-            Answers answer = new Answers();
-            if (answer.IsAnswer == true)
-            {
-                CorrectAnswers.Add(answer);
-            }
-            
-
-            if (answer.IsChosen == true)
-            {
-                ChosenAnswers.Add(answer);
-            }
-            return;
         }
     }
 }
