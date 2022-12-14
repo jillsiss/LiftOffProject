@@ -13,21 +13,17 @@
         <span asp-validation-for="Query"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Answers">
-        <input type="text" value="choice1" placeholder="First Choice"/><input asp-for="Answers" type="radio" name="question1" value="choice1" />
-        <input type="text" value="choice2" placeholder="Second Choice" /><input asp-for="Answers" type="radio" name="question1" value="choice2" />
-        <input type="text" value="choice3" placeholder="Third Choice" /><input asp-for="Answers" type="radio" name="question1" value="choice3" />
+        <label asp-for="Answers">      @*Fix this stuffses. Nothing is being passed to populate the Answer List.*@
+        <input asp-for="Answers" type="radio" name="question1" value="choice1" /><input type="text" value="choice1" placeholder="First Choice" />
+        <input asp-for="Answers" type="radio" name="question1" value="choice2" /><input type="text" value="choice2" placeholder="Second Choice" />
+        <input asp-for="Answers" type="radio" name="question1" value="choice3" /><input type="text" value="choice3" placeholder="Third Choice" />
         </label>
         <span asp-validation-for="Answers"></span>
     </div>
 
     <button onclick={AddQuestions} id="addQuestion">Add Question</button>  
 
-@*<script>
-    document.addEventListener("click", function(){
-    document.getElementById("addQuestion").innerHTML(getElementById("questionform"))
-    })
-</script>*@
+
 
 
     <input type="submit" value="Finish" />

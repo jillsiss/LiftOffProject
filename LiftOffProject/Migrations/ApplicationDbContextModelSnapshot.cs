@@ -48,9 +48,6 @@ namespace LiftOffProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("Point")
-                        .HasColumnType("int");
-
                     b.Property<string>("Query")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -78,9 +75,6 @@ namespace LiftOffProject.Migrations
 
                     b.Property<string>("Title")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("TotalPoints")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

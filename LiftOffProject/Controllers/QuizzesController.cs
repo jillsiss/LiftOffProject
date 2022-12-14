@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using LiftOffProject.Data;
@@ -7,6 +8,7 @@ using LiftOffProject.Models;
 using LiftOffProject.ViewModels;
 //using LiftOffProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -69,30 +71,40 @@ namespace LiftOffProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                List<Answers> theAnswers = new List<Answers>();
+
+                foreach (var answer in addQuestionViewModel.Answers)
+                {
+                    // this foreach loop iterates over the SelectListItem objects and converts them into Answer objects
+                    Answers newAnswer = new Answers();
+                    if (answer.Selected)
+                    {
+                        newAnswer.IsAnswer = true;
+                    }
+
+                    newAnswer.Text = answer.Value;
+
+                    theAnswers.Add(newAnswer);
+                };
+
                 Question newQuestion = new Question
                 {
                     Query = addQuestionViewModel.Query,
-                    Id = addQuestionViewModel.QuestionId,
+                    Answers = theAnswers,
 
-                    
                 };
-                
-                //foreach (var Question in AddQuestions)
-                //{
-                //    context.Questions.Add(newQuestion);
+            
 
-                //}
-                
-                
-                context.Questions.Add(newQuestion);
-                context.SaveChanges();
-                return View(addQuestionViewModel);
-                
+            context.Questions.Add(newQuestion);
+
+            context.SaveChanges();
             }
-
-
-            return Redirect("Index");
+            return View(addQuestionViewModel);
         }
+   
+
+        //    return Redirect("Index");
+        //}
 
         [HttpGet]
         [Route("/quizzes/quiz/{quizId}")]
@@ -146,4 +158,5 @@ namespace LiftOffProject.Controllers
             return Redirect("/Quizzes");
         }
     }
-}
+};
+
