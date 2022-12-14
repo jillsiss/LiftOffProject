@@ -11,6 +11,7 @@ namespace LiftOffProject.Models
         public string Author { get; set; }
         public DateTime Published { get; set; }
         public List<Question> Questions { get; set; }
+        public int TotalPoints { get; set; }
 
 
 
