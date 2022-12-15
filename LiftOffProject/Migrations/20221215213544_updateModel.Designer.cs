@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LiftOffProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221215204922_InitialCommit")]
-    partial class InitialCommit
+    [Migration("20221215213544_updateModel")]
+    partial class updateModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace LiftOffProject.Migrations
 
             modelBuilder.Entity("LiftOffProject.Models.Answers", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AnswerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -45,7 +45,7 @@ namespace LiftOffProject.Migrations
                     b.Property<string>("Text")
                         .HasColumnType("longtext");
 
-                    b.HasKey("Id");
+                    b.HasKey("AnswerId");
 
                     b.HasIndex("QuestionId");
 
@@ -84,7 +84,7 @@ namespace LiftOffProject.Migrations
 
             modelBuilder.Entity("LiftOffProject.Models.Quiz", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("QuizId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -100,7 +100,7 @@ namespace LiftOffProject.Migrations
                     b.Property<int>("TotalPoints")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("QuizId");
 
                     b.ToTable("Quizzes");
                 });

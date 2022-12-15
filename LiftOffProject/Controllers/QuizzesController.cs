@@ -53,7 +53,7 @@ namespace LiftOffProject.Controllers
                 context.Quizzes.Add(newQuiz);
                 context.SaveChanges();
 
-                return Redirect("AddQuestions/" + newQuiz.Id);
+                return Redirect("AddQuestions/" + newQuiz.QuizId);
             }
 
             return View(addQuizViewModel);

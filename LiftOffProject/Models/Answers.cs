@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace LiftOffProject.Models
 {
     public class Answers
     {
-        public int Id { get; set; }
+        [Key]
+        public int AnswerId { get; set; }
         public bool IsAnswer { get; set; }
         public bool IsChosen { get; set; }
         //public Question Question { get; set; }

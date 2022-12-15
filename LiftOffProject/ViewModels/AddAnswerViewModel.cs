@@ -7,8 +7,8 @@ namespace LiftOffProject.ViewModels
 {
     public class AddAnswerViewModel
     {
-        public int QuizId { get; set; }
-        public int QuestionId { get; set; }
+        //public int QuizId { get; set; }
+        //public int QuestionId { get; set; }
         public int AnswerId { get; set; }
         public string AnswerText { get; set; }
         public bool IsAnswer { get; set; }
@@ -27,7 +27,7 @@ namespace LiftOffProject.ViewModels
                     new SelectListItem
                     {
                         Text = answer.Choice,
-                        Value = answer.Id.ToString()
+                        Value = answer.AnswerId.ToString()
                     }
                     );
                 }

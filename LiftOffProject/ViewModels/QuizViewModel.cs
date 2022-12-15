@@ -18,7 +18,7 @@ namespace LiftOffProject.ViewModels
 
         public QuizViewModel(Quiz theQuiz)
         {
-            QuizId = theQuiz.Id;
+            QuizId = theQuiz.QuizId;
             Title = theQuiz.Title;
             Author = theQuiz.Author;
             Published = theQuiz.Published;

@@ -36,12 +36,12 @@ else
         @foreach (var qz in Model)
         {
             <tr>
-                <td>@qz.Id</td>
+                <td>@qz.QuizId</td>
                 <td>@qz.Title</td>
                 <td>@qz.Author</td>
                 <td>@qz.Published</td>
-                <td><a asp-controller="Quizzes" asp-action="Quiz" asp-route-id="@qz.Id">Edit</a></td>
-                <td><a asp-controller="Quizzes" asp-action="Delete" asp-route-id="@qz.Id">Delete</a></td>
+                <td><a asp-controller="Quizzes" asp-action="Quiz" asp-route-id="@qz.QuizId">Edit</a></td>
+                <td><a asp-controller="Quizzes" asp-action="Delete" asp-route-id="@qz.QuizId">Delete</a></td>
             </tr>
         }
     </table>
