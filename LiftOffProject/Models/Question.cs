@@ -8,15 +8,19 @@ namespace LiftOffProject.Models
         public int Id { get; set; }
         public int QuizId { get; set; }
         public string Query { get; set; }
-        public List<Answers> Answers { get; set; }
+        public string AnswerOne { get; set; }
+        public string AnswerTwo { get; set; }
+        public string CorrectAnswer { get; set; }
         public List<Answers> ChosenAnswers { get; set; }
-        public List<Answers> CorrectAnsers { get; set; }
+        public List<Answers> CorrectAnswers { get; set; }
 
 
-        public Question(string query, List<Answers> answers)
+        public Question(string query, string answerOne, string answerTwo, string correctAnswer)
         {
             Query = query;
-            Answers = answers;
+            AnswerOne = answerOne;
+            AnswerTwo = answerTwo;
+            CorrectAnswer = correctAnswer;
         }
 
         public Question()

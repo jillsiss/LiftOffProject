@@ -63,7 +63,7 @@ namespace LiftOffProject.Controllers
         {
             Quiz quiz = context.Quizzes.Find(quizId);
             AddQuestionViewModel addQuestionViewModel = new AddQuestionViewModel();
-            return View(quiz);
+            return View(addQuestionViewModel);
         }
 
         [HttpPost]
@@ -71,33 +71,35 @@ namespace LiftOffProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<Answers> theAnswers = new List<Answers>();
+                //List<Answers> theAnswers = new List<Answers>();
 
-                foreach (var answer in addQuestionViewModel.Answers)
-                {
-                    // this foreach loop iterates over the SelectListItem objects and converts them into Answer objects
-                    Answers newAnswer = new Answers();
-                    if (answer.Selected)
-                    {
-                        newAnswer.IsAnswer = true;
-                    }
+                //foreach (var answer in addQuestionViewModel.Answers)
+                //{
+                //    // this foreach loop iterates over the SelectListItem objects and converts them into Answer objects
+                //    Answers newAnswer = new Answers();
+                //    if (answer.Selected)
+                //    {
+                //        newAnswer.IsAnswer = true;
+                //    }
 
-                    newAnswer.Text = answer.Value;
+                //    newAnswer.Text = answer.Value;
 
-                    theAnswers.Add(newAnswer);
-                };
+                //    theAnswers.Add(newAnswer);
+                //};
 
                 Question newQuestion = new Question
                 {
                     Query = addQuestionViewModel.Query,
-                    Answers = theAnswers,
-
+                    AnswerOne = addQuestionViewModel.AnswerOne,
+                    AnswerTwo = addQuestionViewModel.AnswerTwo,
+                    CorrectAnswer = addQuestionViewModel.CorrectAnswer,
                 };
             
 
-            context.Questions.Add(newQuestion);
+                context.Questions.Add(newQuestion);
 
-            context.SaveChanges();
+                context.SaveChanges();
+
             }
             return View(addQuestionViewModel);
         }

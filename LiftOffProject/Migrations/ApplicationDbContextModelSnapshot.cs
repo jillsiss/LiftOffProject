@@ -29,15 +29,23 @@ namespace LiftOffProject.Migrations
                     b.Property<bool>("IsAnswer")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsSelected")
+                    b.Property<bool>("IsChosen")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<int?>("QuestionId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("QuestionId1")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.HasKey("Id");
 
                     b.HasIndex("QuestionId");
+
+                    b.HasIndex("QuestionId1");
 
                     b.ToTable("Answers");
                 });
@@ -47,6 +55,15 @@ namespace LiftOffProject.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("AnswerOne")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("AnswerTwo")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("CorrectAnswer")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Query")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -279,9 +296,13 @@ namespace LiftOffProject.Migrations
 
             modelBuilder.Entity("LiftOffProject.Models.Answers", b =>
                 {
-                    b.HasOne("LiftOffProject.Models.Question", "Question")
-                        .WithMany("Answers")
+                    b.HasOne("LiftOffProject.Models.Question", null)
+                        .WithMany("ChosenAnswers")
                         .HasForeignKey("QuestionId");
+
+                    b.HasOne("LiftOffProject.Models.Question", null)
+                        .WithMany("CorrectAnswers")
+                        .HasForeignKey("QuestionId1");
                 });
 
             modelBuilder.Entity("LiftOffProject.Models.Question", b =>

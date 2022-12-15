@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LiftOffProject.Migrations
 {
-    public partial class NoPoints : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -175,7 +175,10 @@ namespace LiftOffProject.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     QuizId = table.Column<int>(nullable: false),
-                    Query = table.Column<string>(nullable: true)
+                    Query = table.Column<string>(nullable: true),
+                    AnswerOne = table.Column<string>(nullable: true),
+                    AnswerTwo = table.Column<string>(nullable: true),
+                    CorrectAnswer = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -195,9 +198,11 @@ namespace LiftOffProject.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     IsAnswer = table.Column<bool>(nullable: false),
-                    IsSelected = table.Column<bool>(nullable: false),
+                    IsChosen = table.Column<bool>(nullable: false),
+                    Choice = table.Column<string>(nullable: true),
+                    Text = table.Column<string>(nullable: true),
                     QuestionId = table.Column<int>(nullable: true),
-                    Choice = table.Column<string>(nullable: true)
+                    QuestionId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -208,12 +213,23 @@ namespace LiftOffProject.Migrations
                         principalTable: "Questions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Answers_Questions_QuestionId1",
+                        column: x => x.QuestionId1,
+                        principalTable: "Questions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Answers_QuestionId",
                 table: "Answers",
                 column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Answers_QuestionId1",
+                table: "Answers",
+                column: "QuestionId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
