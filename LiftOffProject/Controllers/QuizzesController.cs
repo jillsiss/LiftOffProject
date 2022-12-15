@@ -61,7 +61,7 @@ namespace LiftOffProject.Controllers
 
         public IActionResult AddQuestions(int quizId)
         {
-            Quiz quiz = context.Quizzes.Find(quizId);
+            Quiz quiz = context.Quizzes.Find(quizId);//"Unnecessary assignment of a value to 'quiz'"???
             AddQuestionViewModel addQuestionViewModel = new AddQuestionViewModel();
             return View(addQuestionViewModel);
         }
@@ -99,6 +99,7 @@ namespace LiftOffProject.Controllers
                 context.Questions.Add(newQuestion);
 
                 context.SaveChanges();
+                return Redirect("/Quizzes");
 
             }
             return View(addQuestionViewModel);
