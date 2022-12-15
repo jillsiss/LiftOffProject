@@ -29,7 +29,7 @@ namespace LiftOffProject
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version("6.0.0"))));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();

@@ -8,66 +8,17 @@
 
 <form asp-controller="Quizzes" asp-action="AddQuestions" method="post" id="questionform" />
     <div class="form-group">
-        <label asp-for="Query"></label>
+        <label asp-for="Query">Query</label>
         <input asp-for="Query" />
         <span asp-validation-for="Query"></span>
     </div>
-    @*<div class="form-group">
-        <input type="radio" name="question" id="choice1" />
-        <form> 
-            <label for="choice1"></label> 
-            <input name="question" id="choice1" list="choice1">
-        </form>
-        <datalist id="choice1" />
-    </div>*@
-<div class="form-group">
-    <input type="radio" name="question" id="choice1" />
-    <form>
-        <label for="choice1"></label>
-        <input name="question" id="choice1" list="choice1">
-    </form>
-    <datalist id="choice1" />
-</div>
-   
-<div class="form-group">
-    <input type="radio" name="question" id="choice2" />
-    <form>
-        <label for="choice2"></label>
-        <input name="question" id="choice2" list="choice2">
-    </form>
-    <datalist id="choice2" />
-</div>
 
-<div class="form-group">
-    <input type="radio" name="question" id="choice3" />
-    <form>
-        <label for="choice3"></label>
-        <input name="question" id="choice3" list="choice3">
-    </form>
-    <datalist id="choice3" />
-</div>
-
-<div class="form-group">
-    <input type="radio" name="question" id="choice4" />
-    <form>
-        <label for="choice4"></label>
-        <input name="question" id="choice4" list="choice4">
-    </form>
-    <datalist id="choice4" />
-</div>
-
-
-
-
-
-
-
-    @*<label asp-for="Answers">      
-        <input asp-for="Answers" type="radio" name="question1" value="choice1" /><label for="choice1" <input type"text" />></label><br />
-        <input asp-for="Answers" type="radio" name="question1" value="choice2" />
-        <input asp-for="Answers" type="radio" name="question1" value="choice3" />
-        </label>*@
-        <span asp-validation-for="Answers"></span>
+    <label>
+        <label>~Correct Answer</label><input asp-for="CorrectAnswer" type="text" name="correct" value="choice1" /><br />
+        <label>Incorrect Answer</label><input asp-for="AnswerOne" type="text" name="incorrect1" value="choice2" /><br/>
+        <label>Incorrect Answer</label><input asp-for="AnswerTwo" type="text" name="incorrect2" value="choice3" /><br/>
+        </label><br/>
+        <span></span>
     
 
     <button onclick={AddQuestions} id="addQuestion">Add Question</button>  
@@ -75,4 +26,4 @@
 
 
 
-    <input type="submit" value="Finish" />
+    <input type="submit" id="addQuestion" value="Finish" />
